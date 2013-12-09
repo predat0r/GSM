@@ -19,11 +19,13 @@ while answer == -1:
 MDM.send('AT+FCLASS=8\r', 0)
 
 while answer == -1:
-    MDM.send("ATD +79118468668\r", 200)
-    answer = (MDM.receive(10)).find('OK')
+    MDM.send('ATD +79118468668\r', 0)
+    answer = (MDM.receive(200)).find('OK')
     MOD.sleep(30)
+    MDM.send('ATH\r', 0)
 
-MDM.send("ATH\r", 0)
+
+MDM.send('ATH\r', 0)
 
 while i != 10:
     GPIO.setIOvalue(7,1)
