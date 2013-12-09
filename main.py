@@ -1,8 +1,6 @@
 import MDM
 import MOD
 import GPIO
-from builtins import range
-
 
 answer = ''
 
