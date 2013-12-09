@@ -1,9 +1,19 @@
 import MDM
 import MOD
 import GPIO
+from builtins import range
+
 
 answer = ''
-i = 0
+
+def led_blink( count ): #debug function
+    for _ in range(count):
+        GPIO.setIOvalue(7,1)
+        MOD.sleep(3)
+        GPIO.setIOvalue(7,0)
+        MOD.sleep(3)
+
+led_blink(2)
 
 # Wait network registration
 while answer == -1:
@@ -16,6 +26,8 @@ while answer == -1:
     answer = (MDM.receive(10)).find('MTS RUS')
     MOD.sleep(10)
 
+led_blink(4)
+
 MDM.send('AT+FCLASS=8\r', 0)
 
 while answer == -1:
@@ -27,13 +39,4 @@ while answer == -1:
 
 MDM.send('ATH\r', 0)
 
-while i != 10:
-    GPIO.setIOvalue(7,1)
-    MOD.sleep(3)
-    GPIO.setIOvalue(7,0)
-    MOD.sleep(3)
-    i = i + 1
-
-
-i = 0
-
+led_blink(6)
